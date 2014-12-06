@@ -7,6 +7,12 @@ class Parser extends CI_Controller{
 		$code_array = explode("\n", $code_text);
 		
 	}
+	public function index(){
+	     $this->load->view("test");
+	}
+	public function validate(){
+	     print_r($_POST);
+	}
 }
 
 
