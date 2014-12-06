@@ -6,6 +6,10 @@ class Parser extends CI_Controller{
 		
 		$code_array = explode("\n", $code_text);
 		
+		foreach ($code_array as $code_line) {
+			echo $code_line."\n";
+		}
+		
 	}
 	public function index(){
 	     $this->load->view("test");
