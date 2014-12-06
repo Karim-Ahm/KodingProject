@@ -2,9 +2,9 @@
 
 class Parser extends CI_Controller{
 	
-	public function parse_text(){
+	public function parse_text($code_text){
 		
-		echo "Hello World";
+		$code_array = explode("\n", $code_text);
 		
 	}
 	public function world_test(){
