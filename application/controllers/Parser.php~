@@ -7,7 +7,8 @@ class Parser extends CI_Controller{
 		echo "Hello World";
 		
 	}
-	
+	public function world_test(){
+	}
 }
 
 
