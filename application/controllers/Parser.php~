@@ -20,36 +20,52 @@ class Parser extends CI_Controller {
           // GET ALL FUNCTIONS
      }
 	public function is_loop($input){
-	     if(strpos("loop",$input) !== FALSE){
+	     if(strpos($input,"loop") !== FALSE){
 	          return true;
 	     }
 	     else return false;
 	}
 	public function is_conditional($input){
-	     if(strpos("if",$input) !== FALSE){
+	     if(strpos($input,"if") !== FALSE){
 	          return true;
 	     }
 	     else return false;
 	}
 	public function syntax_check($input){
-	     $input = "moveup();\nmove down();\nmove_left( )";
+	     $input = "moveup();\nmove down();\nmove_left( ); loop(5) asd; asd; endloops;";
 	     $statements = explode("\n",$input);
 	     foreach($statements as $statement){
-	          verify_syntax($statement);
+	          if(is_array($statement)){
+                    $statement
+	          }
+	          echo $this->verify_syntax($statement);
+	          
 	     }
      }
      public function verify_syntax($input){
-          if(is_loop($input))
-               return verify_syntax_loop($input);
-          else if(is_conditional($input))
-               return verify_syntax_conditional($input);
+          if($this->is_loop($input))
+               return $this->verify_syntax_loop($input);
+          else if($this->is_conditional($input))
+               return $this->verify_syntax_conditional($input);
           else
-               return verify_syntax_function($input);
+               return $this->verify_syntax_function($input);
      }
-     public function verify_syntax_loop(){
-     
+     public function verify_syntax_loop($input){
+          $entry = substr($input,0,7);
+          $closing = substr($input, strlen($input) - 8,8);
+          if(strpos($entry,"loop(") === FALSE)
+               return "Incorrect loop entry";
+          else if($strpos($closing,"endloop;") === FALSE)
+               return "Incorrect loop closing";
+          else return true;
      }
-     public function verify_sy
+     public function verify_syntax_conditional(){
+     }
+     public function verify_syntax_function($input){
+          if(preg_match('/[\s\t]/', $input))
+               return "Extra spaces";
+          else return true;
+     }
 	public function parse_text() {
 		$code_text = $this -> input -> post("text");
 		$code_array = explode("\n", $code_text);
