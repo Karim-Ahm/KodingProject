@@ -40,39 +40,41 @@ class Parser extends CI_Controller {
 
 		$i = 0;
 		for (; $i < $code_array_length; $i++) {
-			$code_array_temp[$i] = substr($code_array_temp[$i], 0, strlen($code_array_temp[$i])-1);
+			$code_array_temp[$i] = substr($code_array_temp[$i], 0, strlen($code_array_temp[$i]) - 1);
 		}
-		
+
 		$i = 0;
 		for (; $i < $code_array_length; $i++) {
+			$code_line_length = strlen($code_array_temp[$i]);
+			if($this->is_conditional($code_array_temp[$i])){		
+				$code_array[$i] = array("type" => "if", "condition" => $this -> get_Parameter($code_array_temp[$i]));
 
-			if (strlen($code_array_temp[$i]) > 4) {
-
-				if (substr($code_array_temp[$i], 0, 4) == "loop") {
-					$code_array[$i] = array("type" => "loop", "condition" => $this -> get_Parameter($code_array_temp[$i]));
-
-					$j = $i+1;
-					$k = 0;
-					for (; $j < $code_array_length; $j++) {
-						//echo substr($code_array_temp[$j], 0, strlen($code_array_temp[$j])-1) == "endloop;"?"true":"false";
-						if ($code_array_temp[$j] == "endloop;") {
-							echo "end";
-							$i = $j;
-							break;
-						} else {
-							echo "hahah<br>";
-							$code_array[$i][$k++] = $code_array_temp[$j];
-						}
+				$j = $i + 1;
+				$k = 0;
+				for (; $j < $code_array_length; $j++) {
+					if ($code_array_temp[$j] == "endif;") {
+						$i = $j;
+						break;
+					} else {
+						$code_array[$i][$k++] = $code_array_temp[$j];
 					}
-				} else {
-					$code_array[$i] = $code_array_temp[$i];
 				}
-			} else if (strlen($code_array_temp[$i]) > 2) {
-				if (substr($code_array_temp[$i], 0, 2) == "if") {
+			} 
+			else if($this->is_loop($code_array_temp[$i])){
+				$code_array[$i] = array("type" => "loop", "condition" => $this -> get_Parameter($code_array_temp[$i]));
 
-				} else {
-					$code_array[$i] = $code_array_temp[$i];
+				$j = $i + 1;
+				$k = 0;
+				for (; $j < $code_array_length; $j++) {
+					if ($code_array_temp[$j] == "endloop;") {
+						$i = $j;
+						break;
+					} else {
+						$code_array[$i][$k++] = $code_array_temp[$j];
+					}
 				}
+			} else {
+				$code_array[$i] = $code_array_temp[$i];
 			}
 		}
 
@@ -95,17 +97,11 @@ class Parser extends CI_Controller {
 	}
 
 	public function is_loop($input) {
-		if (strpos("loop", $input) !== FALSE) {
-			return true;
-		} else
-			return false;
+		return strpos($input, "loop") === 0?true:false;
 	}
 
 	public function is_conditional($input) {
-		if (strpos("if", $input) !== FALSE) {
-			return true;
-		} else
-			return false;
+		return strpos($input, "if") === 0?true:false;
 	}
 
 	public function syntax_check($input) {
