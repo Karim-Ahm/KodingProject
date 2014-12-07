@@ -1,0 +1,41 @@
+.row{
+    overflow: hidden; 
+}
+
+[class*="col-"]{
+    margin-bottom: -99999px;
+    padding-bottom: 99999px;
+}
+@font-face {
+    font-family: 'Quicksand';
+    src: url('Quicksand_Bold.otf');
+    font-weight: normal;
+    font-style: normal;
+    
+}
+
+p1 {
+    
+     font-family: 'Quicksand', sans-serif;
+     font-size: 40px;
+    align-self: center;
+    color: #FFFFFF;
+}
+
+p2 {
+       font-family: 'Quicksand', sans-serif;
+     font-size: 20px;
+    align-self: center;
+    color: #FFFFFF;
+}
+textarea{
+	width: 600px;
+	height: 500px;
+	border: 3px solid #cccccc;
+	padding: 5px;
+	font-family: Tahoma, sans-serif;
+	background-color: #11332e;
+}
+textarea.value{
+ color: #FFFFFF;   
+}
