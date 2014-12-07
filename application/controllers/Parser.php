@@ -37,30 +37,31 @@ class Parser extends CI_Controller {
 
 		$code_array_temp = explode("\n", $code_text);
 		$code_array_length = count($code_array_temp);
-		//echo $code_array_length;
 
-		echo "<pre>";
-		//var_dump($code_array_temp);
-		echo "</pre>";
-
+		$i = 0;
+		for (; $i < $code_array_length; $i++) {
+			$code_array_temp[$i] = substr($code_array_temp[$i], 0, strlen($code_array_temp[$i])-1);
+		}
+		
 		$i = 0;
 		for (; $i < $code_array_length; $i++) {
 
 			if (strlen($code_array_temp[$i]) > 4) {
-				echo substr($code_array_temp[$i], 0, 4) . "<br>";
+
 				if (substr($code_array_temp[$i], 0, 4) == "loop") {
-					$code_array[$i] = "loop";
-					$code_array[$i] = array("condition" => $this -> get_Parameter($code_array_temp[$i]));
-					//echo $code_array[$i]["condition"];
-					$j = $i;
+					$code_array[$i] = array("type" => "loop", "condition" => $this -> get_Parameter($code_array_temp[$i]));
+
+					$j = $i+1;
 					$k = 0;
 					for (; $j < $code_array_length; $j++) {
+						//echo substr($code_array_temp[$j], 0, strlen($code_array_temp[$j])-1) == "endloop;"?"true":"false";
 						if ($code_array_temp[$j] == "endloop;") {
+							echo "end";
 							$i = $j;
 							break;
 						} else {
+							echo "hahah<br>";
 							$code_array[$i][$k++] = $code_array_temp[$j];
-							//echo $code_array[$j][$k]."<br>";
 						}
 					}
 				} else {
@@ -78,12 +79,6 @@ class Parser extends CI_Controller {
 		echo "<pre>";
 		var_dump($code_array);
 		echo "</pre>";
-
-		/*$i = 0;
-		 foreach ($code_array as $code_line) {
-		 echo $code_line . "<br>";
-		 $i++;
-		 }*/
 	}
 
 	public function is_function($input) {
