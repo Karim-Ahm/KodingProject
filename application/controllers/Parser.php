@@ -32,7 +32,28 @@ class Parser extends CI_Controller {
 	     else return false;
 	}
 	public function syntax_check($input){
-	     
+	     $input = "moveup();\nmove down();\nmove_left( )";
+	     $statements = explode("\n",$input);
+	     foreach($statements as $statement){
+	          verify_syntax($statement);
+	     }
+     }
+     public function verify_syntax($input){
+          if(is_loop($input))
+               return verify_syntax_loop($input);
+          else if(is_conditional($input))
+               return verify_syntax_conditional($input);
+          else
+               return verify_syntax_function($input);
+     }
+     public function verify_syntax_loop(){
+     
+     }
+     public function verify_syntax_conditional(){
+     
+     }
+     public function verify_syntax_function(){
+     
      }
 	public function parse_text() {
 		$code_text = $this -> input -> post("text");
@@ -57,7 +78,8 @@ class Parser extends CI_Controller {
 	}
 
 	public function index() {
-		$this -> load -> view("test");
+		//$this -> load -> view("test");
+		$this->syntax_check("");
 	}
 
 	public function validate() {
