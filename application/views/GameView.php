@@ -32,8 +32,8 @@
 				</p2>
 
 				
-				<form method="POST" action="Parser/parse_text">
-					<textarea type="text" name="text"></textarea>
+				<form method="POST" action="Parser/compile">
+					<textarea type="text" name="code_text"></textarea>
 					<input type="submit">				
 				</form>
 			</div>
