@@ -32,7 +32,9 @@ class Parser extends CI_Controller{
 	     }
 	     else return false;
 	}
-	
+	public function syntax_check($input){
+	     
+	}
 }
 
 
