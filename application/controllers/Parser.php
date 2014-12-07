@@ -2,10 +2,6 @@
 
 class Parser extends CI_Controller {
 
-	public function index() {
-		$this -> load -> view("GameView");
-	}
-
 	public function clear_code_lines($code_line) {
 		for ($i = 0; $i < strlen($code_line); $i++) {
 			if ($code_line[$i] == "(") {
@@ -14,6 +10,7 @@ class Parser extends CI_Controller {
 		}
 		return "";
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	
 	public function get_Parameter($line){
@@ -31,6 +28,8 @@ class Parser extends CI_Controller {
 			}
 		}
 	}
+=======
+>>>>>>> parent of 7c568f4... contains:
 
 =======
      public function is_function($input){
@@ -91,70 +90,46 @@ class Parser extends CI_Controller {
      }
 >>>>>>> 80c38bd8c68051348effdcce42c706dc5a00f064
 	public function parse_text() {
-		$code_array = array();	
 		$code_text = $this -> input -> post("text");
-		
-		$code_array_temp = explode("\n", $code_text);
-		$code_array_length = count($code_array_temp);
-		//echo $code_array_length;
-		
-		echo "<pre>";
-		//var_dump($code_array_temp);
-		echo "</pre>";
-		
-		$i = 0;
-		for ( ; $i<$code_array_length ; $i++) {
-			
-			if (strlen($code_array_temp[$i]) > 4) {
-				echo substr($code_array_temp[$i], 0,4)."<br>";
-				if (substr($code_array_temp[$i], 0,4) == "loop"){
-					$code_array[$i] = "loop";
-					$code_array[$i] = array("condition" => $this->get_Parameter($code_array_temp[$i]));
-					//echo $code_array[$i]["condition"];
-					$j = $i;
-					$k = 0;	
-					for( ; $j<$code_array_length ; $j++){
-						if($code_array_temp[$j] == "endloop;"){
-							$i = $j;
-							break;
-						}else{
-							$code_array[$i][$k++] = $code_array_temp[$j];
-							//echo $code_array[$j][$k]."<br>";
-						}
-					}
-				}else{
-					$code_array[$i] = $code_array_temp[$i];
-				}
-			} else if (strlen($code_array_temp[$i]) > 2) {
-				if (substr($code_array_temp[$i], 0,2) == "if") {
+		$code_array = explode("\n", $code_text);
+		$code_type_array = array();
 
-				}else{
-					$code_array[$i] = $code_array_temp[$i];
-				}
+		foreach ($code_array as $code_line) {
+			if ($this->clear_code_lines($code_line) == "loop") {
+				$code_type_array[] = "loop";
+			} else {
+				$code_type_array[] = "function";
 			}
 		}
-		
-		echo "<pre>";
-		var_dump($code_array);
-		echo "</pre>";
-		
-		/*$i = 0;
+
+		$i = 0;
 		foreach ($code_array as $code_line) {
-			echo $code_line . "<br>";
+			echo $code_line;
+			echo $code_type_array[$i] . "<br>";
 			$i++;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		}*/
 =======
+=======
+>>>>>>> parent of 7c568f4... contains:
 		}
 
 	}
 
 	public function index() {
+<<<<<<< HEAD
 		//$this -> load -> view("test");
 		$this->syntax_check("");
 	}
 >>>>>>> 80c38bd8c68051348effdcce42c706dc5a00f064
+=======
+		$this -> load -> view("test");
+	}
+>>>>>>> parent of 7c568f4... contains:
 
+	public function validate() {
+		print_r($_POST);
 	}
 
 }
