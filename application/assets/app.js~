@@ -20,7 +20,7 @@ function domloaded(){
 
          	 $.ajax({
 	            type: 'post',
-	            url: 'Parser/compile',
+	            url: 'Parser',
 	            data: code_text,
 	            success: function (data) {
               		alert('form was submitted'+data);
