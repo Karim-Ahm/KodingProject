@@ -6,7 +6,9 @@ function domloaded(){
 	var compileButton = document.getElementById("submit");
 
 	
+	/*
 	compileButton.addEventListener("click", function(){
+<<<<<<< HEAD
 			//alert("sdas");
 			var textArea = document.getElementById("code_text");
 			var code_text = textArea.value;
@@ -20,7 +22,7 @@ function domloaded(){
 
          	 $.ajax({
 	            type: 'post',
-	            url: 'Parser',
+	            url: 'Parser/compile',
 	            data: code_text,
 	            success: function (data) {
               		alert('form was submitted'+data);
@@ -30,15 +32,36 @@ function domloaded(){
         	});
 
       });
+=======
+				//alert("sdas");
+				var textArea = document.getElementById("code_text");
+				var code_text = textArea.value;
+				
+	
+			$(function () {
+					  $('form').on('submit', function (e) {
+							e.preventDefault();
+						$.ajax({
+					type: 'post',
+					url: 'application/assets/temp.php',
+					data: code_text,
+					success: function (data) {
+						  alert('form was submitted'+data);
+					}
+				  });
+					  });
+				});
+	
+>>>>>>> 304fad5b2b600edc0906034f277d3d5ba4a3ea55
 
-			/*
+			
 			$.getJSON("temp.php", code_text, function(data){
 									alert("data");
 									
-								});*/
+								});
 			
 		
-		});
+		});*/
 	
 	
     Draw(0);
