@@ -8,6 +8,7 @@
 		<link rel="stylesheet" href= <?php echo base_url()."application/assets/style.css"; ?>>
 		<link rel="stylesheet" href= <?php echo base_url()."application/assets/bootstrap.min.css"; ?>>
 		<link rel="stylesheet" href= <?php echo base_url()."application/assets/bootstrap-theme.min.css"; ?>>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 		<script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.3.1.min.js"></script>
 		<script type="text/javascript" src= <?php echo base_url()."application/assets/app.js"; ?>>
@@ -31,10 +32,10 @@
 					Level 1
 				</p2>
 
-				
-				<form method="POST" action="Parser/compile">
-					<textarea type="text" name="code_text"></textarea>
-					<input type="submit">				
+				<div id="demo"></div>
+				<form method="POST" action="" id="form" >
+					<textarea type="text" name="code_text" id="code_text"></textarea>
+					<input type="submit" value="Compile" id="submit">				
 				</form>
 			</div>
 		</div>

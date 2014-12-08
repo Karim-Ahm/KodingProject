@@ -3,7 +3,44 @@
 
 document.addEventListener('DOMContentLoaded',domloaded,false);
 function domloaded(){
+	var compileButton = document.getElementById("submit");
 
+	
+	compileButton.addEventListener("click", function(){
+			//alert("sdas");
+			var textArea = document.getElementById("code_text");
+			var code_text = textArea.value;
+			
+
+		$(function () {
+
+        	$('form').on('submit', function (e) {
+
+          		e.preventDefault();
+
+         	 $.ajax({
+	            type: 'post',
+	            url: 'application/assets/temp.php',
+	            data: code_text,
+	            success: function (data) {
+              		alert('form was submitted'+data);
+            	}
+          	});
+
+        	});
+
+      });
+
+			/*
+			$.getJSON("temp.php", code_text, function(data){
+									alert("data");
+									
+								});*/
+			
+		
+		});
+	
+	
     Draw(0);
     
 }
@@ -21,9 +58,7 @@ function Draw(level) {
             {number:0, x:160, y:255, context:''},
             {number:0, x:215, y:255, context:''},
             {number:0, x:215, y:310, context:''},
-            
-            
-            
+
         ];
         
         for(var i = 0; i < mapTile.length; i++)
@@ -40,3 +75,16 @@ function Draw(level) {
         
     }
 }
+
+
+/*
+function Move(dir) {
+	
+	if(dir == 0)
+	{
+		
+	}
+	
+	
+}*/
+
