@@ -8,56 +8,32 @@ function domloaded(){
 	
 	compileButton.addEventListener("click", function(){
 
-			//alert("sdas");
 			var textArea = document.getElementById("code_text");
 			var code_text = textArea.value;
 			
 
-		$(function () {
-
-        	$('form').on('submit', function (e) {
-
-          		e.preventDefault();
-
-         	 $.ajax({
-	            type: 'post',
-	            url: 'Parser/compile',
-	            data: code_text,
-	            success: function (data) {
-              		alert('form was submitted'+data);
-            	}
-          	});
-
-        	});
-
-      });
-				//alert("sdas");
-				var textArea = document.getElementById("code_text");
-				var code_text = textArea.value;
-				
-	
 			$(function () {
-					  $('form').on('submit', function (e) {
-							e.preventDefault();
-						$.ajax({
-					type: 'post',
-					url: 'application/assets/temp.php',
-					data: code_text,
-					success: function (data) {
-						  alert('form was submitted'+data);
-					}
-				  });
-					  });
-				});
 	
-			
-			$.getJSON("temp.php", code_text, function(data){
-									alert("data");
-									
-								});
+	        	$('form').on('submit', function (e) {
+	
+	          		e.preventDefault();
+	
+	         	 $.ajax({
+		            type: 'post',
+		            url: 'Parser/compile',
+		            data: code_text,
+		            success: function (data) {
+	              		alert('form was submitted'+data);
+	            	}
+	          	});
+	
+	        	});
+	
+	      	});
+				
 			
 		
-		});*/
+		});
 	
 	
     Draw(0);
